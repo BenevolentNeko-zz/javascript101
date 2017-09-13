@@ -11,10 +11,13 @@ const paragraphIntro = document.createElement("p");
 paragraphIntro.innerText = "Welcome to BlueBook";
 rootContainer.appendChild(paragraphIntro);
 
-function getNewsFeedItem(title, body){
+function getNewsFeedItem(name, title, body){
     const postContainer = document.createElement("li");
     const newsFeedTitle = document.createElement("h3");
-    newsFeedTitle.innerText = title;
+    const newsFeedUserName = document.createElement("u");
+    newsFeedUserName.innerText = name;
+    newsFeedTitle.appendChild(newsFeedUserName);
+    newsFeedTitle.innerHTML += ` - ${title}`;
     const newsFeedContent = document.createElement("p");
     newsFeedContent.innerText = body;
     postContainer.appendChild(newsFeedTitle);
@@ -23,13 +26,25 @@ function getNewsFeedItem(title, body){
     return postContainer;
 }
 
+const userCache = {};
+async function getUser(id){
+    if (userCache[id]){
+        return userCache[id];
+    } else {
+        let user = await http.get(`https://jsonplaceholder.typicode.com/users?id=${id}`);
+        user = user[0];
+        userCache[id] = user;
+        return user;
+    }
+}
+
 function initialise(){
     http.get("https://jsonplaceholder.typicode.com/posts").then(async function(posts){
         const newsFeed = document.createElement("ul");        
         for (let i =0; i < posts.length; i++){
-            let post = posts[i];
-            console.log(post.id, post.body);
-            let newsFeedItem = getNewsFeedItem(post.title, post.body);
+            const post = posts[i];
+            const user = await getUser(post.userId);
+            const newsFeedItem = getNewsFeedItem(user.name, post.title, post.body);
             newsFeed.appendChild(newsFeedItem);
         }
         rootContainer.appendChild(newsFeed);
