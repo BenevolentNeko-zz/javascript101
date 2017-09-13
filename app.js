@@ -11,24 +11,8 @@ const paragraphIntro = document.createElement("p");
 paragraphIntro.innerText = "Welcome to BlueBook";
 rootContainer.appendChild(paragraphIntro);
 
-const posts = [
-    {
-        userId: 34,
-        id: 1234,
-        title: "my first post",
-        body: "some totally awesome post content"
-    },
-    {
-        userId: 34,
-        id: 1235,
-        title: "my second post",
-        body: "some other totally awesome post content"
-    }
-];
-
-
 function addPostToBody(title, body){
-    const newsFeed = document.createElement("ul");
+    const newsFeed = document.createElement("div");
     const newsFeedTitle = document.createElement("h3");
     newsFeedTitle.innerText = title;
     const newsFeedContent = document.createElement("p");
@@ -39,8 +23,33 @@ function addPostToBody(title, body){
     rootContainer.appendChild(newsFeed);
 }
 
-for (let i =0; i < posts.length; i++){
-    let post = posts[i];
-    console.log(post.id, post.body);
-    addPostToBody(post.title, post.body);
+function initialise(){
+    http.get("https://jsonplaceholder.typicode.com/posts").then(async function(posts){
+        for (let i =0; i < posts.length; i++){
+            let post = posts[i];
+            console.log(post.id, post.body);
+            addPostToBody(post.title, post.body);
+        }
+    });
 }
+
+const http = {
+    get: function(url){
+        const request = new XMLHttpRequest();
+        const promiseToReturnData = new Promise(function(resolve, reject){
+            request.onreadystatechange = function(){
+                if (request.readyState === XMLHttpRequest.DONE && request.status === 200){
+                    resolve(JSON.parse(request.response));
+                } else if (request.readyState === XMLHttpRequest.DONE) {
+                    throw new Error(request);
+                    reject();
+                }
+            }
+        });
+        request.open("GET", url);
+        request.send();
+        return promiseToReturnData;
+    }
+};
+
+initialise();
