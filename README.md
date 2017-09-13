@@ -32,16 +32,16 @@ Logic
 
 Types part 2
 - Arrays
-- Maps
+- Maps/Dictionaries/Object
 - Nulls, undefined, NaN, 
-- Objects & new
+- new / Classes
 
 Loops
 - for 
 
 Functions
 - execution control
-- something else 
+- methods
 
 Asynchronous Javascript
 - Callback functions
@@ -52,4 +52,5 @@ Testing tools
 - Mocha
 - CucumberJS
 
-
+Everything else
+- npm / node / import 
