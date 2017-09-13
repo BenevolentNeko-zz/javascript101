@@ -11,7 +11,7 @@ const paragraphIntro = document.createElement("p");
 paragraphIntro.innerText = "Welcome to BlueBook";
 rootContainer.appendChild(paragraphIntro);
 
-function getNewsFeedItem(name, title, body){
+function getNewsFeedItem(name, title, body, comments){
     const postContainer = document.createElement("li");
     const newsFeedTitle = document.createElement("h3");
     const newsFeedUserName = document.createElement("u");
@@ -22,6 +22,13 @@ function getNewsFeedItem(name, title, body){
     newsFeedContent.innerText = body;
     postContainer.appendChild(newsFeedTitle);
     postContainer.appendChild(newsFeedContent);
+    const commentsContainer = document.createElement("ol");
+    for (let i = 0; i< comments.length; i++){
+        const comment = document.createElement("li");
+        comment.innerText = comments[i].body;
+        commentsContainer.appendChild(comment);
+    }
+    postContainer.appendChild(commentsContainer);
     
     return postContainer;
 }
@@ -38,13 +45,19 @@ async function getUser(id){
     }
 }
 
+async function getComments(id){
+    let comments = await http.get(`https://jsonplaceholder.typicode.com/posts/${id}/comments`);
+    return comments.slice(-3);
+}
+
 function initialise(){
     http.get("https://jsonplaceholder.typicode.com/posts").then(async function(posts){
         const newsFeed = document.createElement("ul");        
-        for (let i =0; i < posts.length; i++){
+        for (let i =0; i < 10; i++){
             const post = posts[i];
             const user = await getUser(post.userId);
-            const newsFeedItem = getNewsFeedItem(user.name, post.title, post.body);
+            const comments = await getComments(post.id);
+            const newsFeedItem = getNewsFeedItem(user.name, post.title, post.body, comments);
             newsFeed.appendChild(newsFeedItem);
         }
         rootContainer.appendChild(newsFeed);
