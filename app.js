@@ -13,6 +13,7 @@ rootContainer.appendChild(paragraphIntro);
 
 function getNewsFeedItem(name, title, body, comments){
     const postContainer = document.createElement("li");
+    postContainer.classList.add("post");
     const newsFeedTitle = document.createElement("h3");
     const newsFeedUserName = document.createElement("u");
     newsFeedUserName.id = `user-link-${Math.random()}`;

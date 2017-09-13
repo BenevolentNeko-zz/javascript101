@@ -1,0 +1,26 @@
+html {
+    background-color: rgb(147, 175, 193);
+    font-family: Helvetica, sans-serif;
+}
+
+#app-root {
+    background-color: white;
+    margin: 20px;
+    max-width: 900px;
+    margin: auto;
+}
+
+#app-root > p:first-child {
+    padding: 10px;
+    font-size: 3em;
+}
+
+#app-root > ul {
+    padding: 0;
+}
+
+.post {
+    list-style: none;
+    padding: 20px;
+    border-top: 2px solid rgba(0,0,0,0.5);
+}
