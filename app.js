@@ -25,3 +25,8 @@ const posts = [
         body: "some other totally awesome post content"
     }
 ];
+
+for (let i =0; i < posts.length; i++){
+    let post = posts[i];
+    console.log(post.id, post.body);
+}
