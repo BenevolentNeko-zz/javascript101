@@ -15,6 +15,7 @@ function getNewsFeedItem(name, title, body, comments){
     const postContainer = document.createElement("li");
     const newsFeedTitle = document.createElement("h3");
     const newsFeedUserName = document.createElement("u");
+    newsFeedUserName.id = `user-link-${Math.random()}`;
     newsFeedUserName.innerText = name;
     newsFeedTitle.appendChild(newsFeedUserName);
     newsFeedTitle.innerHTML += ` - ${title}`;
@@ -30,7 +31,10 @@ function getNewsFeedItem(name, title, body, comments){
     }
     postContainer.appendChild(commentsContainer);
     
-    return postContainer;
+    return {
+        element: postContainer,
+        ref: newsFeedUserName.id
+    };
 }
 
 const userCache = {};
@@ -51,6 +55,7 @@ async function getComments(id){
 }
 
 function initialise(){
+    let domRefs = [];
     http.get("https://jsonplaceholder.typicode.com/posts").then(async function(posts){
         const newsFeed = document.createElement("ul");        
         for (let i =0; i < 10; i++){
@@ -58,10 +63,26 @@ function initialise(){
             const user = await getUser(post.userId);
             const comments = await getComments(post.id);
             const newsFeedItem = getNewsFeedItem(user.name, post.title, post.body, comments);
-            newsFeed.appendChild(newsFeedItem);
+            newsFeed.appendChild(newsFeedItem.element);
+            domRefs.push({
+                userId: post.userId,
+                domReference: newsFeedItem.ref
+            });
         }
         rootContainer.appendChild(newsFeed);
+    }).then(function(){
+        for (let i = 0; i < domRefs.length; i++){
+            const userLink = document.getElementById(domRefs[i].domReference);
+            userLink.addEventListener("click", getDisplayUserFunction(domRefs[i].userId));
+        }
     });
+}
+
+function getDisplayUserFunction(userId){
+    return async function(e){
+        let user = await http.get(`https://jsonplaceholder.typicode.com/users?id=${userId}`);
+        alert(JSON.stringify(user));
+    }
 }
 
 const http = {
