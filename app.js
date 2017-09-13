@@ -26,7 +26,21 @@ const posts = [
     }
 ];
 
+
+function addPostToBody(title, body){
+    const newsFeed = document.createElement("ul");
+    const newsFeedTitle = document.createElement("h3");
+    newsFeedTitle.innerText = title;
+    const newsFeedContent = document.createElement("p");
+    newsFeedContent.innerText = body;
+    newsFeed.appendChild(newsFeedTitle);
+    newsFeed.appendChild(newsFeedContent);
+    
+    rootContainer.appendChild(newsFeed);
+}
+
 for (let i =0; i < posts.length; i++){
     let post = posts[i];
     console.log(post.id, post.body);
+    addPostToBody(post.title, post.body);
 }
