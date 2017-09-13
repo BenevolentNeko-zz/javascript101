@@ -11,25 +11,28 @@ const paragraphIntro = document.createElement("p");
 paragraphIntro.innerText = "Welcome to BlueBook";
 rootContainer.appendChild(paragraphIntro);
 
-function addPostToBody(title, body){
-    const newsFeed = document.createElement("div");
+function getNewsFeedItem(title, body){
+    const postContainer = document.createElement("li");
     const newsFeedTitle = document.createElement("h3");
     newsFeedTitle.innerText = title;
     const newsFeedContent = document.createElement("p");
     newsFeedContent.innerText = body;
-    newsFeed.appendChild(newsFeedTitle);
-    newsFeed.appendChild(newsFeedContent);
+    postContainer.appendChild(newsFeedTitle);
+    postContainer.appendChild(newsFeedContent);
     
-    rootContainer.appendChild(newsFeed);
+    return postContainer;
 }
 
 function initialise(){
     http.get("https://jsonplaceholder.typicode.com/posts").then(async function(posts){
+        const newsFeed = document.createElement("ul");        
         for (let i =0; i < posts.length; i++){
             let post = posts[i];
             console.log(post.id, post.body);
-            addPostToBody(post.title, post.body);
+            let newsFeedItem = getNewsFeedItem(post.title, post.body);
+            newsFeed.appendChild(newsFeedItem);
         }
+        rootContainer.appendChild(newsFeed);
     });
 }
 
