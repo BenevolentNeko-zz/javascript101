@@ -19,7 +19,7 @@ rootContainer.appendChild(paragraphIntro);
 
 function initialise(){
     let domRefs = [];
-    http.get("https://jsonplaceholder.typicode.com/posts").then(async function(posts){
+    get("https://jsonplaceholder.typicode.com/posts").then(async function(posts){
         const newsFeed = document.createElement("ul");        
         for (let i =0; i < 10; i++){
             const post = posts[i];

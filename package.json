@@ -4,6 +4,7 @@
   "description": "Intro to javascript!",
   "main": "app.js",
   "scripts": {
+    "test": "mocha lib/**/*.test.js --compilers js:babel-core/register",
     "start": "npm run server | npm run watch",
     "server": "node server",
     "bundle": "webpack",
@@ -20,6 +21,12 @@
   },
   "homepage": "https://github.com/BenevolentNeko/javascript101#readme",
   "devDependencies": {
+    "babel": "^6.23.0",
+    "babel-core": "^6.26.0",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.0",
+    "chai": "^4.1.2",
+    "mocha": "^3.5.3",
+    "sinon": "^3.2.1",
     "webpack": "^3.5.6"
   },
   "dependencies": {
