@@ -42,10 +42,12 @@ const dataStructure = {
 
 [Task 13.](https://github.com/BenevolentNeko/javascript101/tree/task13) Style the HTML (using CSS) to make it look beautiful!
 
-[Task 14.](https://github.com/BenevolentNeko/javascript101/tree/task14) Build a Node server which serves the HTML file and assets.  See: http://koajs.com/
+[Task 14.](https://github.com/BenevolentNeko/javascript101/tree/task14) Make your app into an npm project and break your javascript into small modules then bundle them together for distribution. See: https://docs.npmjs.com/ and https://webpack.js.org
 
-[Task 15.](https://github.com/BenevolentNeko/javascript101/tree/task15) Use Node modules from https://www.npmjs.com to clean up code previously written
+[Task 15.](https://github.com/BenevolentNeko/javascript101/tree/task15) Build a Node server which serves the HTML file and assets.  See: http://koajs.com/
 
-[Task 16.](https://github.com/BenevolentNeko/javascript101/tree/task16) Modularise your code using exports/imports
+[Task 16.](https://github.com/BenevolentNeko/javascript101/tree/task16) Use Node modules from https://www.npmjs.com to clean up code previously written
 
-[Task 17.](https://github.com/BenevolentNeko/javascript101/tree/task17) Write unit tests for all of your public functions: https://mochajs.org/
+[Task 17.](https://github.com/BenevolentNeko/javascript101/tree/task17) Modularise your code using exports/imports
+
+[Task 18.](https://github.com/BenevolentNeko/javascript101/tree/task18) Write unit tests for all of your public functions: https://mochajs.org/
