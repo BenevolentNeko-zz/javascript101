@@ -1,0 +1,23 @@
+{
+  "name": "javascript101",
+  "version": "1.0.0",
+  "description": "Intro to javascript!",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "bundle": "webpack -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BenevolentNeko/javascript101.git"
+  },
+  "author": "Adam Darts",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BenevolentNeko/javascript101/issues"
+  },
+  "homepage": "https://github.com/BenevolentNeko/javascript101#readme",
+  "devDependencies": {
+    "webpack": "^3.5.6"
+  }
+}
